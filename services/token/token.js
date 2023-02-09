@@ -12,6 +12,10 @@ class TokenService {
     sellToken(userDto, tokenDto, values) {
         return TokenDAO.sellToken(userDto, tokenDto, values)
     }
+
+    getInvestmentDetails(userDto, tokenDto) {
+        return TokenDAO.getInvestmentDetails(userDto, tokenDto)
+    }
 }
 
 module.exports = new TokenService()

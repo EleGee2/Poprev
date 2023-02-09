@@ -10,7 +10,6 @@ class TokenController {
                 payload: token
             })
         } catch (error) {
-            console.log(error)
             res.status(400).json({ message: error.message })
         }
     }
@@ -23,7 +22,6 @@ class TokenController {
                 message: `${req.body.amount} tokens bought successfully`
             })
         } catch (error) {
-            console.error(error)
             res.status(400).json({ message: error.message })
         }
     }
@@ -36,7 +34,19 @@ class TokenController {
                 message: `${req.body.amount} tokens sold successfully`
             })
         } catch (error) {
-            console.error(error)
+            res.status(400).json({ message: error.message })
+        }
+    }
+
+    async getInvestmentDetails(req, res) {
+        try {
+            const details = await tokenService.getInvestmentDetails(req.user, req.params.tokenId)
+
+            return res.status(201).json({
+                message: "Investment Details gotten successfully",
+                payload: details
+            })
+        } catch (error) {
             res.status(400).json({ message: error.message })
         }
     }

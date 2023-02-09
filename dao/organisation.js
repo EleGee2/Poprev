@@ -42,7 +42,6 @@ class OrganisationDAO {
 
             return { ...organisation, token}
         } catch (error) {
-            console.error(error)
             throw error
         }
     }
@@ -66,7 +65,6 @@ class OrganisationDAO {
 
             return {...organisation, token}
         } catch (error) {
-            console.info(error)
             throw error
         }
     }

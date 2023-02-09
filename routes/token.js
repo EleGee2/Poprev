@@ -16,4 +16,8 @@ router
     .route("/sell/:tokenId")
     .post(AuthController.isUser, TokenController.sellToken)
 
+router
+    .route("/:tokenId/investment-details")
+    .get(AuthController.isUser, TokenController.getInvestmentDetails)
+
 module.exports = router

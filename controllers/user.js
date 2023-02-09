@@ -10,7 +10,6 @@ class UserController {
                 payload: user
             })
         } catch (error) {
-            console.error(error)
             res.status(400).json({ message: error.message })
         }
     }
@@ -24,7 +23,6 @@ class UserController {
                 user
             })
         } catch (error) {
-            console.error(error)
             res.status(400).json({ message: error.message })
         }
     }

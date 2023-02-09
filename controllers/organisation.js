@@ -10,7 +10,6 @@ class OrganisationController {
                 payload: organisation
             })
         } catch (error) {
-            console.error(error)
             res.status(400).json({ message: error.message })
         }
     }
@@ -24,7 +23,6 @@ class OrganisationController {
                 organisation
             })
         } catch (error) {
-            console.error(error)
             res.status(400).json({ message: error.message })
         }
     }

@@ -49,7 +49,6 @@ class UserDAO {
 
             return {...user , token}
         } catch (error) {
-            console.error(error)
             throw error
         }
     }
@@ -73,7 +72,6 @@ class UserDAO {
 
             return {...user, token}
         } catch (error) {
-            console.info(error)
             throw error
         }
     }

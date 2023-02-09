@@ -37,7 +37,6 @@ class TokenDAO {
 
             return token
         } catch (error) {
-            console.error(error)
             throw error
         }
     }
@@ -141,24 +140,31 @@ class TokenDAO {
         })
     }
 
-    async getTokenDetails(user, tokenId) {
-        const token = await tokenQueries.getTokenById(tokenId)
-        if(!token) {
-            throw new Error("Token not found")
-        }
-        const wallet = await walletQueries.getWalletByQuery({userId: user.id, tokenId: tokenId })
+    async getInvestmentDetails(user, tokenId) {
+        try {
+            const token = await tokenQueries.getTokenById(tokenId)
+            if (!token) {
+                throw new Error("Token not found")
+            }
+            const wallet = await walletQueries.getWalletByQuery({userId: user.id, tokenId: tokenId})
 
-        if(!wallet) {
-            throw new Error("You don't have any investment in this token")
-        }
+            if (!wallet) {
+                throw new Error("You don't have any investment in this token")
+            }
 
-        const transaction = await transactionQueries.getTransactionByQuery({ user: user.id, tokenId: tokenId, owner_model: "user"})
-
-
-        return {
-            "number_of_tokens_owned": wallet.balance,
-            "total_amount_invested": wallet.balance * process.env.BUY_PRICE,
-            "current_value_of_token": token
+            const transactions = await transactionQueries.getTransactionsByQuery({
+                userId: user.id,
+                tokenId: tokenId,
+                owner_model: "user"
+            })
+            return {
+                "number_of_tokens_owned": wallet.balance,
+                "total_amount_invested": wallet.balance * process.env.BUY_PRICE,
+                "current_value_of_token": Number(token.valuation / wallet.balance).toFixed(2),
+                transactions
+            }
+        } catch (error) {
+            throw error
         }
     }
 }
