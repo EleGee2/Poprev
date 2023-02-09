@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Install dependencies
+npm install
+
 # Start the node app with nodemon
 nodemon server.js | bunyan -o short
 
