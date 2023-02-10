@@ -10,5 +10,5 @@ nodemon server.js | bunyan -o short
 sleep 5
 
 # Run the sequelize migration
-npx sequelize db:migrate
+npm sequelize db:migrate
 
